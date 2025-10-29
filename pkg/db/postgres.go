@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"airline-booking/pkg/config"
@@ -21,7 +20,7 @@ func ConnectPostgres(cfg *config.PostgresConfig) (*sqlx.DB, error) {
 
 	db, err := sqlx.Connect("pgx", dsn)
 	if err != nil {
-		return nil, fmt.Errorf("Error connecting to postgres: %w", err)
+		return nil, fmt.Errorf("error connecting to postgres: %w", err)
 	}
 
 	// Connection pool settings
@@ -34,10 +33,10 @@ func ConnectPostgres(cfg *config.PostgresConfig) (*sqlx.DB, error) {
 	defer cancel()
 
 	if err := db.PingContext(ctx); err != nil {
-		return nil, fmt.Errorf("Error pinging postgres: %w", err)
+		return nil, fmt.Errorf("error pinging postgres: %w", err)
 	}
 
-	log.Println("Connected to Postgres successfully")
+	//log.Println("Connected to Postgres successfully")
 	return db, nil
 
 }
