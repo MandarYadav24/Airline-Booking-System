@@ -41,25 +41,6 @@ type KafkaConfig struct {
 	}
 }
 
-/*
-type KafkaConfig struct {
-	Brokers  []string
-	Topic    string
-	GroupID  string
-	Security struct {
-		EnableTLS bool
-		Username  string
-		Password  string
-	}
-	Producer struct {
-		Retries        int
-		BatchTimeoutMS int
-	}
-	Consumer struct {
-		InitialOffset string
-	}
-}
-*/
 /*-------------------- Redis --------------------*/
 type RedisConfig struct {
 	Address      string
@@ -127,35 +108,4 @@ func LoadConfig() (*Config, error) {
 
 	return cfg, nil
 
-	/*
-		// -------------------- Load Postgres --------------------
-		viper.SetConfigName("dbconfig")
-		viper.SetConfigType("yaml")
-		viper.AddConfigPath(configDir)
-		if err := viper.ReadInConfig(); err != nil {
-			log.Fatalf("Error reading dbconfig.yml: %v", err)
-		}
-		if err := viper.UnmarshalKey("postgres", &cfg.Postgres); err != nil {
-			log.Fatalf("Error decoding Postgres config: %v", err)
-		}
-
-		// -------------------- Load Kafka --------------------
-		viper.SetConfigName("kafkaconfig")
-		if err := viper.ReadInConfig(); err != nil {
-			log.Fatalf("Error reading kafkaconfig.yml: %v", err)
-		}
-		if err := viper.UnmarshalKey("kafka", &cfg.Kafka); err != nil {
-			log.Fatalf("Error decoding Kafka config: %v", err)
-		}
-
-		// -------------------- Load Redis --------------------
-		viper.SetConfigName("redisconfig")
-		if err := viper.ReadInConfig(); err != nil {
-			log.Fatalf("Error reading redisconfig.yml: %v", err)
-		}
-		if err := viper.UnmarshalKey("redis", &cfg.Redis); err != nil {
-			log.Fatalf("Error decoding Redis config: %v", err)
-		}
-	*/
-	//return &cfg, nil
 }
