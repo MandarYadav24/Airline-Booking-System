@@ -1,0 +1,12 @@
+kafka:
+  brokers:
+    - "127.0.0.1:9092"
+  topic: "flight-events"
+  groupId: "flight-service-group"
+  autoOffsetReset: "earliest"
+  enableAutoCommit: true
+  producer:
+    retries: 5
+    batchTimeoutMS: 100
+  consumer:
+    initialOffset: "newest"

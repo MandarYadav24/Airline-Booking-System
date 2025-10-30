@@ -1,0 +1,9 @@
+redis:
+  address: "127.0.0.1:6379"
+  password: ""
+  db: 0
+  poolSize: 20
+  minIdleConns: 10
+  readTimeout: 2s
+  writeTimeout: 2s
+  dialTimeout: 2s
