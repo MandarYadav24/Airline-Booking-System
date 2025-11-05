@@ -40,7 +40,7 @@ func main() {
 	log.Println("✅ Connected to Kafka Producer")
 
 	// Initialize Repository and Handler
-	repo := flight.NewRepository(pg)
+	repo := flight.NewRepository(pg, redisClient.GetClient())
 	handler := flight.NewHandler(repo, producer, cfg.Kafka.Topic)
 
 	// Define HTTP routes

@@ -34,7 +34,7 @@ func main() {
 	defer producer.Close()
 	log.Println("✅ Connected to Kafka")
 
-	repo := booking.NewRepository(pg)
+	repo := booking.NewRepository(pg, redisClient.GetClient())
 	handler := booking.NewHandler(repo, producer, cfg.Kafka.Topic)
 
 	http.HandleFunc("/bookings", func(w http.ResponseWriter, r *http.Request) {
