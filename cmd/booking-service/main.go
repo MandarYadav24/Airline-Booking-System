@@ -21,18 +21,18 @@ func main() {
 		log.Fatalf("Database connection failed: %v", err)
 	}
 	defer pg.Close()
-	log.Println("✅ Connected to PostgreSQL")
+	log.Println("Connected to PostgreSQL")
 
 	redisClient := redis.NewRedisClient(&cfg.Redis)
 	defer redisClient.Close()
-	log.Println("✅ Connected to Redis")
+	log.Println("Connected to Redis")
 
 	producer, err := kafka.NewProducer(&cfg.Kafka)
 	if err != nil {
 		log.Fatalf("Kafka producer connection failed: %v", err)
 	}
 	defer producer.Close()
-	log.Println("✅ Connected to Kafka")
+	log.Println("Connected to Kafka")
 
 	repo := booking.NewRepository(pg, redisClient.GetClient())
 	handler := booking.NewHandler(repo, producer, cfg.Kafka.Topic)
@@ -48,6 +48,6 @@ func main() {
 		}
 	})
 
-	log.Println("🚀 Booking service running on port 8081...")
+	log.Println("Booking service running on port 8081...")
 	log.Fatal(http.ListenAndServe(":8081", nil))
 }

@@ -24,12 +24,12 @@ func main() {
 		log.Fatalf("Database connection failed: %v", err)
 	}
 	defer pg.Close()
-	log.Println("✅ Connected to PostgreSQL")
+	log.Println("Connected to PostgreSQL")
 
 	// Connect to Redis
 	redisClient := redis.NewRedisClient(&cfg.Redis)
 	defer redisClient.Close()
-	log.Println("✅ Connected to Redis")
+	log.Println("Connected to Redis")
 
 	// Initialize Kafka Producer (Sarama)
 	producer, err := kafka.NewProducer(&cfg.Kafka)
@@ -37,7 +37,7 @@ func main() {
 		log.Fatalf("Failed to connect to Kafka producer: %v", err)
 	}
 	defer producer.Close()
-	log.Println("✅ Connected to Kafka Producer")
+	log.Println("Connected to Kafka Producer")
 
 	// Initialize Repository and Handler
 	repo := flight.NewRepository(pg, redisClient.GetClient())
@@ -55,8 +55,8 @@ func main() {
 		}
 	})
 
-	log.Println("🚀 Flight service started successfully — all connections active.")
-	log.Println("🌐 Listening on port 8080...")
+	log.Println("Flight service started successfully — all connections active.")
+	log.Println("Listening on port 8080...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
